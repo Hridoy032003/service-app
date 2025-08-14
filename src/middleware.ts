@@ -10,12 +10,12 @@ export async function middleware(request: NextRequest) {
   });
 
 
-  console.log('Middleware token:', token);
+
 
   const { pathname } = request.nextUrl;
 
   const isServiceProviderRoute = pathname.startsWith('/serviceProvider');
-  const isCustomerRoute = pathname.startsWith('/customer/');
+  const isCustomerRoute = pathname.startsWith('/customer');
 
 
   const protectedRoutes = isServiceProviderRoute || isCustomerRoute;
@@ -26,20 +26,7 @@ export async function middleware(request: NextRequest) {
   }
 
 
-  if (token) {
-    const userRole = token.role as string;
-
-    if (userRole) {
-     
-      if (isCustomerRoute && userRole === 'serviceprovider') {
-        return NextResponse.redirect(new URL('/serviceProvider/dashboard', request.url));
-      }
-
-      if (isServiceProviderRoute && userRole === 'customer') {
-        return NextResponse.redirect(new URL(`/customer/dashboard/${token.id}`, request.url)); 
-      }
-    }
-  }
+  
 
 
   return NextResponse.next();

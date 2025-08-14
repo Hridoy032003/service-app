@@ -9,7 +9,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt';
 import { db } from '@/utils/db'; 
 
-export const authOptions: NextAuthOptions = {
+export const  authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: {
     strategy: 'jwt',

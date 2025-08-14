@@ -1,17 +1,14 @@
 import React from "react";
 import { getAuthSession } from "@/lib/auth";
 import { RoleSelectionGrid } from "@/components/globle-component/RoleSelectionGrid ";
-import { redirect } from "next/navigation";
 
-export default async function ChooseRolePage({ params }: { params: { userId: string } }) {
+export default async function ChooseRolePage(
+ ) {
   const session = await getAuthSession();
-
-
+console.log(session);
   if (!session?.user) {
-
     return <p>You must be logged in to view this page.</p>;
   }
- 
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-4">
